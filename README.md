@@ -1,5 +1,7 @@
 This tool can be used to get a rough count of participants in a Slack channel once it has been archived. Simply copy and paste in the channel's text, and a names list and count will be produced alongside it. 
 
+There is now a checkbox functionality, which allows users to toggle results (names, or incorrectly parsed values) from the general count. 
+
 ## Available Scripts
 
 In the project directory, you can run:
