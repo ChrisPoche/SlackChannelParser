@@ -7,7 +7,7 @@ class App extends React.Component {
 
     this.state = {
       textValue: '',
-      uniqueNames: []
+      uniqueNames: [] 
     };
   }
   parseText = () => {
@@ -35,12 +35,27 @@ class App extends React.Component {
     let uniqueNames = new Set(namesList);
     uniqueNames = [...uniqueNames];
     uniqueNames = uniqueNames.sort();
+    uniqueNames = uniqueNames.map(name => {
+      let checkList = {};
+      checkList['name'] = name;
+      checkList['checked'] = true;
+      return checkList;
+    })
     this.setState({ uniqueNames });
   }
   addTextToState = (e) => {
     let textValue = e.target.value;
     this.setState({ textValue })
     this.parseText();
+  }
+  checkbox = (e) => {
+    let i = isNaN(e.target.id) ? e.target.id.substring(4) : e.target.id;
+    let uniqueNames = this.state.uniqueNames;
+    let checked = !uniqueNames[i].checked
+    let name = uniqueNames[i].name
+    uniqueNames[i] = {name ,checked};
+
+    this.setState({ uniqueNames })
   }
   render() {
     return (
@@ -55,8 +70,8 @@ class App extends React.Component {
             ></textarea>
           </div>
           <div className={this.state.uniqueNames.length > 0 ? 'side-by-side name-list' : ''}>
-            {this.state.uniqueNames.length > 0 && <h3>Names List ({this.state.uniqueNames.length})</h3>}
-            {this.state.uniqueNames.length > 0 && <ul>{this.state.uniqueNames.map(name => <li key={'name-' + name}>{name}</li>)}</ul>}
+            {this.state.uniqueNames.length > 0 && <h3>Names List ({this.state.uniqueNames.filter(user => user.checked).length})</h3>}
+            {this.state.uniqueNames.length > 0 && this.state.uniqueNames.map((user,index) => <div key={'div-' + user.name}><input onChange={this.checkbox} checked={!!user.checked} type='checkbox' key={'checkbox-' + user.name} id={index}/><label onClick={this.checkbox} id={'lab-'+index} key={'label-' + user.name} className={user.checked ? '' : 'strike'}>{user.name}</label></div>)}
           </div>
         </header>
       </div>
