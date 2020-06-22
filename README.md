@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This tool can be used to get a rough count of participants in a Slack channel once it has been archived. Simply copy and paste in the channel's text, and a names list and count will be produced alongside it. 
 
 ## Available Scripts
 
